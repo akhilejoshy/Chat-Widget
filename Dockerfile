@@ -7,5 +7,6 @@ FROM alpine:latest
 WORKDIR /app
 COPY --from=builder /app/server .
 COPY Widgets/ ./Widgets/
+COPY Backend/migrations/ ./migrations/
 EXPOSE 8080
 CMD ["./server"]
