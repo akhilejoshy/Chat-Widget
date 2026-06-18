@@ -174,7 +174,7 @@ CREATE TABLE website_scripts (
 );
 ```
 
-The UUID `id` is what goes into the widget's `data-website-id` attribute.
+The UUID `id` is what goes into the widget's `data-id` attribute.
 
 ### `chat_bot_chats`
 
@@ -606,7 +606,7 @@ Register a new website to embed the widget on.
 }
 ```
 
-The returned `id` (UUID) is your `data-website-id` for the embed snippet.
+The returned `id` (UUID) is your `data-id` for the embed snippet.
 
 ---
 
@@ -961,12 +961,38 @@ sequenceDiagram
 ```html
 <script
   src="https://your-server.com/api/v1/chat-widget/widget.js"
-  data-website-id="35a447a1-9c18-4d55-be9a-27feed8f8317"
+  data-id="35a447a1-9c18-4d55-be9a-27feed8f8317"
   data-base-url="https://your-server.com"
 ></script>
 ```
 
-Place this just before `</body>` on any page.
+### Where to paste the snippet
+
+Paste the script tag **just before the closing `</body>` tag** of your HTML. This works on any platform:
+
+**Plain HTML:**
+```html
+    ...page content...
+
+    <script
+      src="https://your-server.com/api/v1/chat-widget/widget.js"
+      data-id="YOUR_WEBSITE_ID"
+      data-base-url="https://your-server.com"
+    ></script>
+  </body>
+</html>
+```
+
+| Platform | Where to paste |
+|---|---|
+| **WordPress** | Appearance → Theme Editor → `footer.php` → before `</body>` |
+| **Shopify** | Online Store → Themes → Edit Code → `theme.liquid` → before `</body>` |
+| **Webflow** | Project Settings → Custom Code → Footer Code |
+| **Wix** | Settings → Custom Code → Add Code → Body (end) |
+| **Squarespace** | Settings → Advanced → Code Injection → Footer |
+| **Any HTML file** | Just before `</body>` at the bottom of the file |
+
+> Once added, a floating chat bubble appears in the bottom-right corner of the page. No page reload or build step is needed.
 
 ### Widget behavior
 
@@ -1245,7 +1271,7 @@ Set all env vars via `docker run -e KEY=VALUE` or a `.env` file with `--env-file
 
 ### Widget does not appear on embedded page
 
-**Cause:** `data-website-id` is invalid or `data-base-url` points to wrong server.
+**Cause:** `data-id` is invalid or `data-base-url` points to wrong server.
 **Fix:** Open browser devtools → Network → look for the `GET /client/chatbot/script/:id` request. If it 404s, the website ID is wrong. If it fails with CORS error, the backend CORS config is misconfigured.
 
 ### Nginx closes WebSocket after 60 seconds

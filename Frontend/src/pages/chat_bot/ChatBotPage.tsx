@@ -357,8 +357,9 @@ export default function ChatBotPage() {
             const v = c === 'x' ? r : (r & 0x3 | 0x8);
             return v.toString(16);
           });
+      const baseUrl = apiUrl.replace('/api/v1', '');
       const scriptPath = `${apiUrl}/chat-widget/widget.js`;
-      const scriptTag = `<script src="${scriptPath}" data-id="${websiteId}"></script>`;
+      const scriptTag = `<script src="${scriptPath}" data-id="${websiteId}" data-base-url="${baseUrl}"></script>`;
 
       const formData = new FormData();
       const dataPayload = JSON.stringify({
@@ -485,7 +486,8 @@ export default function ChatBotPage() {
 
 
   const copyScript = (website_id: string) => {
-    const script = `<script src="${apiUrl}/chat-widget/widget.js" data-id="${website_id}"></script>`;
+    const baseUrl = apiUrl.replace('/api/v1', '');
+    const script = `<script src="${apiUrl}/chat-widget/widget.js" data-id="${website_id}" data-base-url="${baseUrl}"></script>`;
     navigator.clipboard.writeText(script);
     setCopiedId(website_id);
     toast({ title: 'Script Copied', description: 'Widget script has been copied to clipboard.' });

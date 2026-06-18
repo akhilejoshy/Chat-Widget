@@ -27,7 +27,7 @@ No third-party SaaS dependencies. No per-seat pricing. Full data ownership.
 <!-- Add this to any website -->
 <script
   src="https://your-server.com/api/v1/chat-widget/widget.js"
-  data-website-id="your-website-id"
+  data-id="your-website-id"
   data-base-url="https://your-server.com"
 ></script>
 ```
@@ -195,7 +195,7 @@ npm run dev
 ```html
 <script
   src="http://localhost:8080/api/v1/chat-widget/widget.js"
-  data-website-id="YOUR_WEBSITE_ID"
+  data-id="YOUR_WEBSITE_ID"
   data-base-url="http://localhost:8080"
 ></script>
 ```
@@ -209,17 +209,44 @@ The widget is a single self-contained JavaScript file. No npm, no build step req
 ```html
 <script
   src="https://chat.yourcompany.com/api/v1/chat-widget/widget.js"
-  data-website-id="35a447a1-9c18-4d55-be9a-27feed8f8317"
+  data-id="35a447a1-9c18-4d55-be9a-27feed8f8317"
   data-base-url="https://chat.yourcompany.com"
 ></script>
 ```
 
 | Attribute | Required | Description |
 |---|---|---|
-| `data-website-id` | Yes | UUID from the dashboard Websites panel |
+| `data-id` | Yes | UUID from the dashboard Websites panel |
 | `data-base-url` | Yes | Base URL of your Chat-Widget backend |
 
-The widget handles visitor session persistence, real-time WebSocket messaging, file uploads, audio recording, and department selection — all within the floating chat bubble UI.
+### Where to paste the snippet
+
+Paste the script tag **just before the closing `</body>` tag** of your HTML file. This applies to any website type:
+
+**Plain HTML website:**
+```html
+    ...your page content...
+
+    <script
+      src="https://chat.yourcompany.com/api/v1/chat-widget/widget.js"
+      data-id="YOUR_WEBSITE_ID"
+      data-base-url="https://chat.yourcompany.com"
+    ></script>
+  </body>
+</html>
+```
+
+**WordPress:** Appearance → Theme Editor → `footer.php` → paste just before `</body>`
+
+**Shopify:** Online Store → Themes → Edit Code → `theme.liquid` → paste just before `</body>`
+
+**Webflow:** Project Settings → Custom Code → Footer Code → paste there
+
+**Wix:** Settings → Custom Code → Add Code → place in Body (end)
+
+**Squarespace:** Settings → Advanced → Code Injection → Footer → paste there
+
+> The widget appears as a floating chat bubble in the bottom-right corner of your website as soon as the snippet is added.
 
 ---
 
